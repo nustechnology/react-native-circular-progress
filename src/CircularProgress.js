@@ -76,7 +76,7 @@ export default class CircularProgress extends React.PureComponent {
             <Path
               d={circlePath}
               stroke={tintColor}
-              strokeWidth={width}
+              strokeWidth={width*2} //clear circle border
               strokeLinecap={lineCap}
               fill="transparent"
             />
