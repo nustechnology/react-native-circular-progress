@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Animated,
-  AppState,
-  Easing,
-  View,
-  ViewPropTypes
-} from 'react-native';
+import { Animated, AppState, Easing, View, ViewPropTypes } from 'react-native';
 import CircularProgress from './CircularProgress';
 const AnimatedProgress = Animated.createAnimatedComponent(CircularProgress);
 
@@ -14,8 +8,8 @@ export default class AnimatedCircularProgress extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      fillAnimation: new Animated.Value(props.prefill)
-    }
+      fillAnimation: new Animated.Value(props.prefill),
+    };
   }
 
   componentDidMount() {
@@ -29,13 +23,16 @@ export default class AnimatedCircularProgress extends React.PureComponent {
   }
 
   reAnimate(prefill, toVal, dur, ease) {
-    this.setState({
-      fillAnimation: new Animated.Value(prefill)
-    }, () => this.animate(toVal, dur, ease));
+    this.setState(
+      {
+        fillAnimation: new Animated.Value(prefill),
+      },
+      () => this.animate(toVal, dur, ease)
+    );
   }
 
   animate(toVal, dur, ease) {
-    const toValue = toVal || this.props.fill;
+    const toValue = toVal >= 0 ? toVal : this.props.fill;
     const duration = dur || this.props.duration;
     const easing = ease || this.props.easing;
 
@@ -52,12 +49,7 @@ export default class AnimatedCircularProgress extends React.PureComponent {
   render() {
     const { fill, prefill, ...other } = this.props;
 
-    return (
-      <AnimatedProgress
-        {...other}
-        fill={this.state.fillAnimation}
-      />
-    );
+    return <AnimatedProgress {...other} fill={this.state.fillAnimation} />;
   }
 }
 
